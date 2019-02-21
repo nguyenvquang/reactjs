@@ -11,6 +11,8 @@ class RowComp extends Component {
     render() {
         const columns = this.props.columns;
         const data = this.props.data;
+        const actions = this.props.actions;
+        const style = { textAlign: 'center' }
         return (
            <tr>
                <td>{this.props.index + 1}</td>
@@ -18,6 +20,12 @@ class RowComp extends Component {
                  return (<td key={index}>{data[item]}</td>)
                  })
                }
+               {actions.map((item, index) => {
+                   if (!data.enable) return "";
+                   return (<td style={style} key={index}>
+                       <button onClick={(e) => item.action(data)} type="button"><i className={item.css}></i></button>
+                   </td>)
+               })}
            </tr>
         );
     }

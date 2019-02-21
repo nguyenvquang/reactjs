@@ -10,14 +10,20 @@ class TheadComp extends Component {
 
     render() {
         const title = this.props.title;
+        const actions = this.props.actions;
+        const style = { textAlign: 'center' }
         return (
-            <thead>
-                <th>#</th>
+            <tr>
+                <th style={style}>#</th>
                 {title.map((item, index) => {
-                    return (<th key={index}>{item}</th>)
+                    return (<th style={style} key={index}>{item}</th>)
+                })}
+
+                {actions.map((item, index) => {
+                    return (<th style={style} key={index}>{item.name}</th>)
                 })
                 }
-            </thead>
+            </tr>
         );
     }
 }

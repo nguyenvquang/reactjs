@@ -12,15 +12,18 @@ class TableComp extends Component {
     render() {
         const data = this.props.data;
         const title = this.props.title;
+        const actions = this.props.actions;
         const body = [];
 
         data.map((item, index) => {
-            body.push( <RowComp index={index} key={index} columns={['A', 'B']} data={item}/>);
+            body.push( <RowComp index={index} key={index} columns={['A', 'B']} data={item} actions={actions}/>);
         })
         return (
             <div className="App">
                 <table className="table">
-                    <TheadComp title={title}/>
+                   <thead>
+                     <TheadComp title={title} actions={actions}/>
+                   </thead>
                     <tbody>
                     {
                         body
