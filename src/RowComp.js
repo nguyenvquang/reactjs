@@ -5,8 +5,12 @@ class RowComp extends Component {
 
     constructor(props, context) {
         super(props, context);
+        this.onClick2 = this.onClick2.bind(this);
     }
 
+    onClick2(event, action) {
+       action();
+    }
 
     render() {
         const columns = this.props.columns;
@@ -21,9 +25,12 @@ class RowComp extends Component {
                  })
                }
                {actions.map((item, index) => {
-                   if (!data.enable) return "";
                    return (<td style={style} key={index}>
-                       <button onClick={(e) => item.action(data)} type="button"><i className={item.css}></i></button>
+                           {data.enable ?
+                               <button onClick={ (e) => item.action(data)} type="button"><i className={item.css}></i></button>
+                               : ""
+                           }
+
                    </td>)
                })}
            </tr>

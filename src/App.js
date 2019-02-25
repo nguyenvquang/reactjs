@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import TableComp from "./TableComp";
+import StudentForm from "./StudentForm";
 
 class App extends Component {
 
@@ -14,6 +15,7 @@ class App extends Component {
             ]};
         this.addNew = this.addNew.bind(this);
         this.deleteRow = this.deleteRow.bind(this);
+        this.saveForm = this.saveForm.bind(this);
     }
     addNew(item) {
         console.log(item);
@@ -22,9 +24,10 @@ class App extends Component {
         this.setState({rows: d});
     }
     deleteRow(item) {
-        console.log(item);
+
         let d = this.state.rows;
         let indexOf = d.indexOf(item);
+        console.log(indexOf);
         if (indexOf !== -1) {
             d.splice(indexOf, 1);
             item.enable = false;
@@ -33,10 +36,18 @@ class App extends Component {
 
     }
 
+    saveForm(data) {
+        console.log(data);
+        let d = this.state.rows;
+        d.push({id: data.maSV, name: data.tenSV, enable: true});
+        this.setState({rows: d});
+    }
+
 
   render() {
     return (
       <div className="App">
+          <StudentForm actions={this.saveForm}/>
         <TableComp title={["Ma", "Ho ten"]} data={this.state.rows} actions={[{name: 'Add new', css: 'fa fa-pencil-square-o', action: this.addNew}, {name: 'Delete', css: 'fa fa-trash', action: this.deleteRow}]}/>
           <button onClick={ this.addNew}>Add New</button>
       </div>
